@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .profile-container{
+        display: grid;
+        grid-template-columns: 2fr 2fr;      
+    }
+</style>
+
+<div class="profile-container">
+    <div>
+        <img src="{{student.avatar.url}}"/>
+
+    </div>
+       
+    <div>
+        <h1>Student Info</h1>
+    </div>
+</div> 
+{% endblock content %}
