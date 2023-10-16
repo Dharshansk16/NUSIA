@@ -34,8 +34,8 @@
                 </div>
               </li> {% endcomment %}
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-sm-2" type="search" placeholder="Enter the USN">
+            <form action = {% url "home" %} method = "GET" class="d-flex">
+              <input class="form-control me-sm-2" name = 'q' placeholder="Enter the USN">
               <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
           </div>
