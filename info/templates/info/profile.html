@@ -1,32 +1,88 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class = "container">
-    <div class = "row">
-        <div class = "col-md-4 offset-md-4 text-center">
-            <img src="{{studentId.avatar.url}}" alt="" class = "img-fluid rounded" width="300" height= "300"/>
+<style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #f6d365;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right bottom, rgba(39, 128, 227, 1), rgba(39, 128, 227, 1))
+        };
+</style>
+{% comment %} <style>
+    .no-border-margin-padding {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+</style> {% endcomment %}
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100 ">
+        <div class="col col-lg-6 mb-4 mb-lg-0" style="height:100%; width:100%;">
+          <div class="card mb-3" style="border-radius: .5rem; height:500px; width:100%">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; height:500px;">
+                <img src="{{studentId.avatar.url}}"
+                  alt="Avatar" class="img-fluid my-5 " style="width: 200px;" />
+                <h1>{{studentId.first_name}} {{studentId.last_name}}</h1>
+                <p></p>
+                <i class="far fa-edit mb-5"></i>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{studentId.email_id}}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>USN</h6>
+                      <p class="text-muted">{{studentId.usn}}</p>
+                    </div>
+                  </div>
+                  {% comment %} <h6>Projects</h6> {% endcomment %}
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Branch</h6>
+                      <p class="text-muted">{{studentId.branch}}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>CGPA</h6>
+                      <p class="text-muted">{{studentId.cgpa}}</p>
+                    </div>
+                    <div class="card-body p-4">
+                        {% comment %} <h6>Information</h6> {% endcomment %}
+                        <hr class="mt-0 mb-4">
+                        <div class="row pt-1">
+                          <div class="col-6 mb-3">
+                            <h6>Placed Company</h6>
+                            <p class="text-muted">{{studentId.placed_company}}</p>
+                          </div>
+                          <div class="col-6 mb-3">
+                            <h6>Last Updated</h6>
+                            <p class="text-muted">{{studentId.updated}}</p>
+                          </div>
+                    
+                  </div>
+                  {% comment %} <div class="d-flex justify-content-start">
+                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  </div> {% endcomment %}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-5">
-            <h2 class= "mt-5">{{studentId.first_name}} {{studentId.last_name}}</h2>
-            <table class= "table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th class = "text-nowrap" style="width:20 %;">
-                            USN
-                        </th>
-                        <td>{{studentId.usn}}</td>
-                    </tr>
-                    <tr>
-                        <th class = "text-nowrap">Email ID</th>
-                        <td>{{studentId.email_id}}</td>
-                    </tr>
-                    <tr>
-                        <th class ="text-nowrap">Placed Company</th>
-                        <td>{{studentId.placed_company}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      </div>
     </div>
-</div>
+    {% include "footer.html" %}
 {% endblock content %}
