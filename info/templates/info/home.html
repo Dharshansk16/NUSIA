@@ -28,14 +28,18 @@
                   <tbody>
                     {% for student in students %}
                     <tr class = "clickable-row" data-href = "{% url "stud-profile" student.id %}">
-                      <td>{{ student.usn }}</td>
+                      <td>{{ student.usn |upper }}</td>
                       <td>{{student.first_name }}</td>
                       <td>{{ student.last_name }}</td>
                       <td>{{ student.email_id }}</td>
                       <td>{{ student.cgpa }}</td>
                       <td>{{ student.branch }}</td>
                       <td>{{ student.placed_company }}</td>
-                      <td>Actions</td>
+                      <td>
+                        <button type = "button" class = "btn btn-success me-1" href = "{% url "stud-profile" student.id %}">
+                          <i class="fa-solid fa-circle-info fa-sm"></i>
+                        </button>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
