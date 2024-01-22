@@ -11,7 +11,7 @@ class Student(models.Model):
     branch = models.CharField(max_length=50)
     placed_company = models.CharField(max_length=100)
     cgpa = models.FloatField()
-    avatar = models.ImageField(null=True, default="avatar.svg")
+    avatar = models.ImageField(upload_to="static/images",null=True, default="avatar.svg", blank=True)
     updated = models.DateTimeField(auto_now=True) # Takes time stamp every time a user submits or saves.
     created = models.DateTimeField(auto_now_add=True) #Takes time stamp when we first submit or save(created time).
 

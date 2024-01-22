@@ -31,7 +31,9 @@
                   alt="Avatar" class="img-fluid my-5 " style="width: 200px;" />
                 <h1>{{studentId.first_name}} {{studentId.last_name}}</h1>
                 <p></p>
-                <i class="far fa-edit mb-5"></i>
+                <a class="btn btn-primary" href="{% url "update" studentId.id %}">
+                <i class="far fa-edit mb-5 fa-lg"></i>
+                </a>
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">

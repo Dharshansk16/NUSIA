@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render , redirect
+from django.http import HttpResponse 
 from .models import Student
 from django.urls import reverse
 from django.db.models import Q
@@ -29,7 +29,7 @@ def studentProfile(request ,pk):
 
 def add(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST)
+        form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
             new_usn = form.cleaned_data['usn']
             new_first_name = form.cleaned_data['first_name']
@@ -59,3 +59,30 @@ def add(request):
         form = StudentForm()
     context = {'form': StudentForm()}
     return render(request , 'info/addstud.html', context)
+
+
+def update(request , pk):
+    if request.method == 'POST':
+        student = Student.objects.get(id = pk)
+        form = StudentForm(request.POST , request.FILES, instance=student)
+        if form.is_valid():
+            form.save()
+            context = {'form': form,
+                       'success':True}
+            return render(request , 'info/update.html', context)
+    else:
+        student = Student.objects.get(id = pk)
+        form = StudentForm(instance=student)
+    context = {'form':form}
+    return render(request , 'info/update.html', context)
+
+
+def delete(request , pk):
+    if request.method == "POST":
+        student = Student.objects.get(id = pk)
+        student.delete()
+        return redirect('home')
+    student= Student.objects.get(id =pk)
+    return render(request, 'info/delete.html', {'obj':student})
+
+

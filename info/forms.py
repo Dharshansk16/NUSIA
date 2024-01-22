@@ -16,6 +16,7 @@ class StudentForm(forms.ModelForm):
             'placed_company': 'Placed Company',
             'cgpa':'CGPA',
             'avatar': 'Profile Picture',
+
         }
         widgets = {
             'usn':forms.TextInput(attrs={'class': 'form-control'}),
