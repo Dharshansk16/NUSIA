@@ -83,6 +83,7 @@
     
     
             <input type = "submit" value="Login" />
+            
     
         </form>
         </div>
@@ -100,23 +101,3 @@
 {% endblock content %}
 
 
-
-<form action="" method="POST">
-  {% csrf_token %}
-  <!-- Email input field -->
-  <div class="form-group">
-    <label for="exampleInputEmail1" class="form-label mt-3">Username</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username">
-    <small id="emailHelp" class="form-text text-muted">Enter Your Username</small>
-  </div>
-  
-  <!-- Password input field -->
-  <div class="form-group">
-    <label for="exampleInputPassword1" class="form-label mt-1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" autocomplete="off">
-    <small id="emailHelp" class="form-text text-muted">Enter Your Password</small>
-  </div>
-  
-  <!-- Submit button -->
-  <input type="submit" value="Login">
-</form>
