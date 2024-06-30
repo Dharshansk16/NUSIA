@@ -9,11 +9,7 @@ Welcome to NUSIA, a student management project designed to streamline the proces
 - **Search Functionality:** Easily search for student information.
 - **Responsive Design:** User-friendly interface accessible on various devices.
 
-![home]
-![login]
-![profile]
-![registration]
-![update]
+
 
 
 
@@ -38,7 +34,7 @@ The profile page allows authorised users to view and update student information,
 The student registration page enables authorized users to add new student information to the database. It includes fields for entering various details like name, picture, cgpa , USN, course, contact information and placement details.
 
 ### Update Page
-![Update Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/2b056219-f7d1-41bc-a984-64f13207e002)
+![Update Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/283b9aad-6bc9-470e-a11f-9f96b9420e34)
 
 The update page provides functionality for modifying existing student records. Users can update details like course information, grades, and personal information.
 
