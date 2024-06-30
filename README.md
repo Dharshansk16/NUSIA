@@ -9,29 +9,36 @@ Welcome to NUSIA, a student management project designed to streamline the proces
 - **Search Functionality:** Easily search for student information.
 - **Responsive Design:** User-friendly interface accessible on various devices.
 
+![home]
+![login]
+![profile]
+![registration]
+![update]
+
+
 
 ### Login Page
-![Login Page](screenshots/login_page.png)
+![Login Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/de6c4c20-9696-410a-abc5-8fce4038f6d2)
 
 The login page provides a secure gateway for authorized users to access the system. Users must enter valid credentials to proceed to the main interface.
 
 ### Home Page
-![Home Page](screenshots/home_page.png)
+![Home Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/fe087b82-d9c0-4ddd-b2d5-a94d28d7fcca)
 
 The home page serves as the dashboard, offering an overview of the system and quick links to various functionalities such as student management, profile settings, and more.
 
 ### Profile Page
-![Profile Page](screenshots/profile_page.png)
+![Profile Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/9edacda9-919b-452c-9271-90ea0793feb5)
 
 The profile page allows authorised users to view and update student information, ensuring their details are always current and accurate.
 
 ### Student Registration Page
-![Student Registration Page](screenshots/student_registration_page.png)
+![Student Registration Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/2b056219-f7d1-41bc-a984-64f13207e002)
 
 The student registration page enables authorized users to add new student information to the database. It includes fields for entering various details like name, picture, cgpa , USN, course, contact information and placement details.
 
 ### Update Page
-![Update Page](screenshots/update_page.png)
+![Update Page](https://github.com/Dharshansk16/NUSIA/assets/142658700/2b056219-f7d1-41bc-a984-64f13207e002)
 
 The update page provides functionality for modifying existing student records. Users can update details like course information, grades, and personal information.
 
@@ -47,7 +54,37 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Installation
 
- Clone the repository:
+ 1.Clone the repository:
    ```sh
-   git clone https://github.com/your-username/NUSIA.git
+   git clone https://github.com/Dharshansk16/NUSIA.git
+
+2.Navigate to the project directory:
+cd nusia
+
+3.Install the required Python packages:
+pip install -r requirements.txt
+
+
+4.Apply database migrations:
+python manage.py migrate
+
+5.Create a superuser to access the admin panel:
+python manage.py createsuperuser
+
+6.Run the development server:
+python manage.py runserver
+
+7.Open your web browser and go to http://127.0.0.1:8000/ to access the application.
+```
+
+Log in using the superuser credentials.
+Navigate through the different sections to manage student information.
+
+Django - The web framework used.
+Bootstrap - Frontend framework for responsive design.
+
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+
 
