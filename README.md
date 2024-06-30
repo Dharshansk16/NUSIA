@@ -77,14 +77,14 @@ python manage.py runserver
 7.Open your web browser and go to http://127.0.0.1:8000/ to access the application.
 ```
 
-Log in using the superuser credentials.
-Navigate through the different sections to manage student information.
+# Log in using the superuser credentials.<br>
+Navigate through the different sections to manage student information.<br>
 
-Django - The web framework used.
-Bootstrap - Frontend framework for responsive design.
+Django - The web framework used.<br>
+Bootstrap - Frontend framework for responsive design.<br>
 
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+## Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
 
 
