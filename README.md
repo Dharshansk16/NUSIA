@@ -50,28 +50,31 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Installation
 
- 1.Clone the repository:
+1. **Clone the repository:**
+
    ```sh
    git clone https://github.com/Dharshansk16/NUSIA.git
+2. **Navigate to the project directory:**
+   ```sh
+   cd NUSIA
+   
+3. **Install the required Python packages:**
+   ```sh
+   pip install -r requirements.txt
+4. **Apply database migrations**
 
-2.Navigate to the project directory:
-cd nusia
+   ```sh
+   python manage.py migrate
+5. **Create a superuser to access the admin panel:**
 
-3.Install the required Python packages:
-pip install -r requirements.txt
+   ```sh
+   python manage.py createsuperuser
+6. **Run the development server:**
 
-
-4.Apply database migrations:
-python manage.py migrate
-
-5.Create a superuser to access the admin panel:
-python manage.py createsuperuser
-
-6.Run the development server:
-python manage.py runserver
+   ```sh
+   python manage.py runserver
 
 7.Open your web browser and go to http://127.0.0.1:8000/ to access the application.
-```
 
 # Log in using the superuser credentials.<br>
 Navigate through the different sections to manage student information.<br>
