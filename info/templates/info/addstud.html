@@ -1,32 +1,66 @@
-{% extends "main.html" %}
-
-{% block content %}
-<h3 class='text-center m-4'>Add Student</h3>
-{% if success %}
-<div class='alert alert-success'role= 'alert'>
-    New Student is Added Successfully.
-    <a href="{% url "home" %}" class = 'alert-link'>Go to Home Page.</a>
-</div>
-{% else %}
-<div class= "row justify-content-center">
-    <div class = "col-6">
-        <div class="card bg-light mb-3">
-            <div class="card-header">
-                <i class="fa-solid fa-address-card fa-lg">
-                    Student Registration
-                </i>
-            </div>
-            <div class="card-body">
-
-              <form action="{% url "add" %}" method = "POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type ='submit' class= 'btn btn-primary'>Add</button>
-                <a href="{% url "home" %}" class = 'btn btn-secondary'>Cancel</a>
-              </form>
-            </div>
-          </div>
+{% extends "main.html" %} {% block content %}
+<div class="flex flex-col items-center my-6 px-4">
+  {% if success %}
+  <div
+    class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 w-full max-w-lg rounded-lg"
+  >
+    <p>New Student Added Successfully.</p>
+    <a
+      href="{% url 'home' %}"
+      class="text-blue-600 font-semibold hover:underline"
+      >Go to Home Page</a
+    >
+  </div>
+  {% else %}
+  <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 my-6">
+    <div
+      class="flex flex-col items-center text-center text-lg font-medium mb-4 text-gray-700"
+    >
+      <p>
+        <i class="fa-solid fa-address-card fa-lg mr-2"></i
+        ><span class="fa-solid fa-sm">Student Registration</span>
+      </p>
     </div>
+    <form
+      action="{% url 'add' %}"
+      method="POST"
+      enctype="multipart/form-data"
+      class="space-y-4"
+    >
+      {% csrf_token %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {% for field in form %}
+        <div class="flex flex-col">
+          <label class="text-gray-500 font-semibold mb-1"
+            >{{ field.label }}</label
+          >
+          {{ field }} {% if field.errors %}
+          <ul style="color: red">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="flex justify-between mt-6">
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-5 py-2 rounded-lg shadow-md hover:bg-blue-700 transition"
+        >
+          Add
+        </button>
+        <a
+          href="{% url 'home' %}"
+          class="bg-gray-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-gray-600 transition"
+        >
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+  {% endif %}
 </div>
-{% endif %}
 {% endblock content %}

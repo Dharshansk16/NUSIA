@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 
@@ -61,30 +62,15 @@ def add(request):
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            new_usn = form.cleaned_data['usn']
-            new_first_name = form.cleaned_data['first_name']
-            new_last_name = form.cleaned_data['last_name']
-            new_email_id = form.cleaned_data['email_id']
-            new_placed_company = form.cleaned_data['placed_company']
-            new_branch = form.cleaned_data['branch']
-            new_cgpa = form.cleaned_data['cgpa']
-            new_avatar = form.cleaned_data['avatar']
-
-
-            new_student = Student(
-                usn = new_usn,
-                first_name = new_first_name,
-                last_name = new_last_name,
-                branch = new_branch,
-                email_id = new_email_id,
-                placed_company = new_placed_company,
-                cgpa = new_cgpa,
-                avatar  = new_avatar, 
-            )
-            new_student.save()
-            context = {'form':StudentForm(),
-                       'success': True}
-            return render(request, 'info/addstud.html',context)
+            try:
+                student = form.save(commit=False) 
+                student.full_clean()
+                student.save()
+                return render(request, "info/addstud.html", {'form':StudentForm(), "success":True})
+            except Exception as e:
+                 for field, errors in e.message_dict.items():
+                    for error in errors:
+                        form.add_error(field, error)
     else:
         form = StudentForm()
     context = {'form': StudentForm()}
@@ -96,14 +82,18 @@ def update(request , pk):
         student = Student.objects.get(id = pk)
         form = StudentForm(request.POST , request.FILES, instance=student)
         if form.is_valid():
-            form.save()
-            context = {'form': form,
-                       'success':True}
-            return render(request , 'info/update.html', context)
+            try:
+                form.save()
+                context= {'form': form,'student':student,
+                          'success':True}
+                return render(request, "info/update.html", context)
+            except ValidationError as e:
+                for field, error in e.message_dict.items():
+                    form.add_error(field,error)
     else:
         student = Student.objects.get(id = pk)
         form = StudentForm(instance=student)
-    context = {'form':form}
+    context = {'form':form , "student":student}
     return render(request , 'info/update.html', context)
 
 

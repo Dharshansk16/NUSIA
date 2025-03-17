@@ -1,90 +1,67 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% block content %}
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="flex flex-col md:flex-row">
+      <!-- Left Profile Section -->
+      <div
+        class="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-6 flex flex-col items-center w-full md:w-1/3"
+      >
+        <img
+          src="{{ studentId.avatar.url }}"
+          alt="Avatar"
+          class="w-40 h-40 rounded-full border-4 border-white shadow-lg"
+        />
+        <h2 class="mt-4 text-xl font-semibold">
+          {{ studentId.first_name }} {{ studentId.last_name }}
+        </h2>
+        <a
+          href="{% url 'update' studentId.id %}"
+          class="mt-4 px-4 py-2 bg-white text-blue-700 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
+        >
+          <i class="fas fa-edit"></i> Edit Profile
+        </a>
+      </div>
 
-{% block content %}
-<style>
-    .gradient-custom {
-        /* fallback for old browsers */
-        background: #f6d365;
-        
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-        
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to right bottom, rgba(39, 128, 227, 1), rgba(39, 128, 227, 1))
-        };
-</style>
-{% comment %} <style>
-    .no-border-margin-padding {
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
-</style> {% endcomment %}
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100 ">
-        <div class="col col-lg-6 mb-4 mb-lg-0" style="height:100%; width:100%;">
-          <div class="card mb-3" style="border-radius: .5rem; height:500px; width:100%">
-            <div class="row g-0">
-              <div class="col-md-4 gradient-custom text-center text-white"
-                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; height:500px;">
-                <img src="{{studentId.avatar.url}}"
-                  alt="Avatar" class="img-fluid my-5 " style="width: 200px;" />
-                <h1>{{studentId.first_name}} {{studentId.last_name}}</h1>
-                <p></p>
-                <a class="btn btn-primary" href="{% url "update" studentId.id %}">
-                <i class="far fa-edit mb-5 fa-lg"></i>
-                </a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body p-4">
-                  <h6>Information</h6>
-                  <hr class="mt-0 mb-4">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>Email</h6>
-                      <p class="text-muted">{{studentId.email_id}}</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>USN</h6>
-                      <p class="text-muted">{{studentId.usn | upper}}</p>
-                    </div>
-                  </div>
-                  {% comment %} <h6>Projects</h6> {% endcomment %}
-                  <hr class="mt-0 mb-4">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>Branch</h6>
-                      <p class="text-muted">{{studentId.branch}}</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>CGPA</h6>
-                      <p class="text-muted">{{studentId.cgpa}}</p>
-                    </div>
-                    <div class="card-body p-4">
-                        {% comment %} <h6>Information</h6> {% endcomment %}
-                        <hr class="mt-0 mb-4">
-                        <div class="row pt-1">
-                          <div class="col-6 mb-3">
-                            <h6>Placed Company</h6>
-                            <p class="text-muted">{{studentId.placed_company}}</p>
-                          </div>
-                          <div class="col-6 mb-3">
-                            <h6>Last Updated</h6>
-                            <p class="text-muted">{{studentId.updated}}</p>
-                          </div>
-                    
-                  </div>
-                  {% comment %} <div class="d-flex justify-content-start">
-                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                  </div> {% endcomment %}
-                </div>
-              </div>
-            </div>
+      <!-- Right Info Section -->
+      <div class="p-6 flex-1">
+        <h3 class="text-xl font-semibold text-gray-700">Profile Information</h3>
+        <hr class="my-4" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Email -->
+          <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-500">Email</h4>
+            <p class="text-gray-700">{{ studentId.email_id }}</p>
+          </div>
+          <!-- USN -->
+          <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-500">USN</h4>
+            <p class="text-gray-700 uppercase">{{ studentId.usn }}</p>
+          </div>
+          <!-- Branch -->
+          <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-500">Branch</h4>
+            <p class="text-gray-700">{{ studentId.branch }}</p>
+          </div>
+          <!-- CGPA -->
+          <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-500">CGPA</h4>
+            <p class="text-gray-700">{{ studentId.cgpa }}</p>
+          </div>
+          <!-- Placed Company -->
+          <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-500">Placed Company</h4>
+            <p class="text-gray-700">{{ studentId.placed_company }}</p>
+          </div>
+          <!-- Last Updated -->
+          <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-500">Last Updated</h4>
+            <p class="text-gray-700">{{ studentId.updated }}</p>
           </div>
         </div>
       </div>
     </div>
-    {% include "footer.html" %}
-{% endblock content %}
+  </div>
+</div>
+
+{% include "footer.html" %} {% endblock content %}

@@ -1,103 +1,62 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUSIA-Nitte University Student Information Access</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-</head>
-<body>
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    body {
-      background: linear-gradient(to bottom, #3498db, #2980b9); /* Gradient background */
-      position: relative;
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUSIA - Login</title>
 
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.3); /* Light overlay for contrast */
-    }
-    .custom-card {
-      margin-top: 50px; /* Add margin to the top of the card */
-      height: 400px; /* Set your desired height */
-      border: 2px solid #2c3e50; /* Dark border color */
-      background: 
-        url('https://www.transparenttextures.com/patterns/tex2res2.png'); /* Geometric pattern background */
-      position: relative;
-      z-index: 1; /* Ensure the card is above the overlay */
-      overflow: hidden; /* Hide overflowing pattern outside the card */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
-    }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-    .custom-card h1 {
-      color: #ecf0f1; /* Light text color */
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a 3D text effect with a shadow */
-      margin-bottom: 20px; /* Add some space below the heading */
-    }
+  <body class="bg-gray-200 h-screen flex items-center justify-center">
+    {% block content %}
+    <div
+      class="bg-gray-50 backdrop-blur-lg rounded-xl shadow-lg p-8 w-[400px] h-[400px]"
+    >
+      <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">Login</h1>
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
 
-    .card-body {
-      padding: 20px; /* Add padding to the card body */
-    }
-
-    .form-group {
-      margin-bottom: 20px; /* Add some space between form groups */
-    }
-  </style>
-  <title>Centered, Larger, and Taller Card Form</title>
-</head>
-<body>
-
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card custom-card">
-        <div class="card-body">
-          <h1 class="card-title">LOGIN</h1>
-          <form action="" method = "POST">
-            {% csrf_token %}
-            <div class="form-group">
-            <label for="Username"  class="form-label mt-3">Username:</label>
-            <input type="text" class="form-control" name = "username" placeholder="Enter Username"/>
-            </div>
-            <div class="form-group">
-            <label for="exampleInputPassword1" class="form-label mt-1">Password:</label>
-            <input type = "password" class="form-control" name ="password" placeholder = "Enter Password"/>
-            </div>
-    
-    
-            <input type = "submit" value="Login" />
-            
-    
-        </form>
+        <div class="mb-4">
+          <label for="username" class="text-gray-600 font-semibold mb-2 block"
+            >Username</label
+          >
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter Username"
+            required
+            class="w-full p-3 border border-gray-300 rounded-lg bg-white bg-opacity-70 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
         </div>
-      </div>
+
+        <div class="mb-4">
+          <label for="password" class="text-gray-600 font-semibold mb-2 block"
+            >Password</label
+          >
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+            class="w-full p-3 border border-gray-300 rounded-lg bg-white bg-opacity-70 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-300"
+        >
+          Login
+        </button>
+      </form>
     </div>
-  </div>
-</div>
-
-</body>
+    <div
+      class="fixed bottom-0 w-full text-center bg-gray-900 text-white py-2 text-md"
+    >
+      Login Required!
+    </div>
+    {% endblock content %}
+  </body>
 </html>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"</script>
-</body>
-{% endblock content %}
-
-
