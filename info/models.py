@@ -24,9 +24,16 @@ class Student(models.Model):
         
         if self.cgpa < 0 or self.cgpa>10:
             raise ValidationError({'cgpa':"Invalid value"})
-
+    
     def save(self, *args, **kwargs):
         self.full_clean()
+
+        # Normalize placed_company and branch
+        if self.placed_company:
+            self.placed_company = self.placed_company.strip().upper()
+        if self.branch:
+            self.branch = self.branch.strip().upper()
+
         super().save(*args, **kwargs)
 
     class Meta:

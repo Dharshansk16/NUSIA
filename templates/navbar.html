@@ -23,6 +23,12 @@
       </button>
       <div class="hidden md:flex space-x-6 items-center text-lg" id="menu">
         <a
+          href="{% url 'chart' %}"
+          class="text-white hover:text-gray-200 flex items-center"
+        >
+          <i class="fa-solid fa-chart-simple mr-2"></i>Analytics
+        </a>
+        <a
           href="{% url 'home' %}"
           class="text-white hover:text-gray-200 flex items-center"
         >

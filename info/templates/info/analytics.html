@@ -1,0 +1,99 @@
+{% extends 'main.html' %} {% block content %}
+<div class="container mx-auto py-10 px-4">
+  <h1 class="text-3xl font-bold text-center mb-10 text-blue-800">
+    Placement Analytics Dashboard
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- Company-wise Placements (Bar Chart) -->
+    <div class="bg-white rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-center text-gray-700">
+        Students Placed per Company
+      </h2>
+      <div class="relative h-96">
+        <!-- increased height here -->
+        <canvas id="companyChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Branch-wise Distribution (Pie Chart) -->
+    <div class="bg-white rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-center text-gray-700">
+        Student Distribution by Branch
+      </h2>
+      <div class="relative h-96">
+        <!-- increased height here -->
+        <canvas id="branchChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const companyCtx = document.getElementById('companyChart').getContext('2d');
+  const branchCtx = document.getElementById('branchChart').getContext('2d');
+
+  new Chart(companyCtx, {
+    type: 'bar',
+    data: {
+      labels: {{ company_labels|safe }},
+      datasets: [{
+        label: 'Number of Students',
+        data: {{ company_data|safe }},
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Students Placed per Company',
+          font: { size: 16 }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1 }
+        }
+      }
+    }
+  });
+
+  new Chart(branchCtx, {
+    type: 'pie',
+    data: {
+      labels: {{ branch_labels|safe }},
+      datasets: [{
+        data: {{ branch_data|safe }},
+        backgroundColor: [
+          '#FF6384', '#36A2EB', '#FFCE56', '#8BC34A', '#9C27B0',
+          '#FF9800', '#00ACC1', '#F44336', '#3F51B5', '#CDDC39'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { size: 13 } }
+        },
+        title: {
+          display: true,
+          text: 'Student Distribution by Branch',
+          font: { size: 16 }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

@@ -2,14 +2,14 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse 
 from .models import Student , Certification
 from django.urls import reverse
-from django.db.models import Q
+from django.db.models import Q,Count
 from .forms import StudentForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
-
+import json
 # Create your views here.
 
 def loginPage(request):
@@ -63,6 +63,29 @@ def studentProfile(request ,pk):
     studentId = Student.objects.get(id=pk)
     context = {'studentId':studentId}
     return render(request, 'info/profile.html', context)
+
+
+def analyticsView(request):
+    #Company vs Student Count
+    company_count = Student.objects.values('placed_company').annotate(count=Count('id')).order_by('-count')
+    company_labels = [item['placed_company'] for item in company_count]
+    company_data = [item['count'] for item in company_count]
+
+    #Branch vs Student Count
+    branch_count = Student.objects.values('branch').annotate(count=Count('id')).order_by('-count')
+    branch_labels = [item['branch'] for item in branch_count]
+    branch_data = [item['count'] for item in branch_count]
+
+    
+
+    context = {
+        "company_labels": json.dumps(company_labels),
+        "company_data": json.dumps(company_data),
+        "branch_labels": json.dumps(branch_labels),
+        "branch_data": json.dumps(branch_data),
+    }
+    return render(request, "info/analytics.html", context)
+
 
 @login_required(login_url='login')
 def add(request):
