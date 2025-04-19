@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse 
-from .models import Student
+from .models import Student , Certification
 from django.urls import reverse
 from django.db.models import Q
 from .forms import StudentForm
@@ -41,6 +41,7 @@ def logoutUser(request):
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
+    sort= request.GET.get('sort')
     students = Student.objects.filter(
         Q(usn__icontains=q) |
         Q(placed_company__icontains=q) |
@@ -49,7 +50,13 @@ def home(request):
         Q(first_name__icontains = q) |
         Q(last_name__icontains = q)
     )
-    context =  {'students':students}
+    if sort=="cgpa":
+        students=students.order_by("-cgpa")
+    elif sort=="recent":
+        students=students.order_by('-created')
+    else:
+        students=students.order_by('created')
+    context =  {'students':students, 'sort':sort}
     return render(request , 'info/home.html', context)
 
 def studentProfile(request ,pk):

@@ -2,9 +2,28 @@
 <div class="container mx-auto p-8 my-4">
   {% if students %}
   <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <div class="px-6 py-3 bg-blue-500 text-white text-xl font-medium">
-      Student Records
+    <div
+      class="px-6 py-3 bg-blue-500 text-white text-xl font-medium flex justify-between"
+    >
+      <span>Student Records</span>
+      <div class="flex">
+        <div class="flex items-center space-x-3 text-sm">
+          <select onchange="window.location.href=this.value" class="bg-white text-blue-500 border px-3 py-1 rounded">
+            <option value="?sort=recent" {% if sort == 'recent' or not sort %}selected{% endif %}>
+              Recently Added
+            </option>
+            <option value="?sort=cgpa" {% if sort == 'cgpa' %}selected{% endif %}>
+              CGPA
+            </option>
+            <option value="?sort=oldest" {% if sort == 'oldest' %}selected{% endif %}>
+              Oldest First
+            </option>
+          </select>
+        </div>
+        <span class="text-end px-4">Records: {{students|length }}</span>
+      </div>
     </div>
+
     <div class="overflow-x-auto">
       <table
         class="w-full border-collapse bg-white text-left shadow-md text-lg"
@@ -28,12 +47,12 @@
             data-href="{% url 'stud-profile' student.id %}"
           >
             <td class="p-3">{{ student.usn |upper }}</td>
-            <td class="p-3">{{ student.first_name }}</td>
-            <td class="p-3">{{ student.last_name }}</td>
-            <td class="p-3">{{ student.email_id }}</td>
-            <td class="p-3">{{ student.cgpa }}</td>
-            <td class="p-3">{{ student.branch }}</td>
-            <td class="p-4">{{ student.placed_company }}</td>
+            <td class="p-3">{{ student.first_name | upper }}</td>
+            <td class="p-3">{{ student.last_name | upper }}</td>
+            <td class="p-3">{{ student.email_id}}</td>
+            <td class="p-3">{{ student.cgpa | upper }}</td>
+            <td class="p-3">{{ student.branch  | upper }}</td>
+            <td class="p-4">{{ student.placed_company  | upper}}</td>
             <td class="p-3 flex justify-center space-x-2">
               <a
                 href="{% url 'stud-profile' student.id %}"
